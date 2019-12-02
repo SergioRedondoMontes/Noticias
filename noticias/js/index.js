@@ -31,7 +31,7 @@ function orderNews(data){
         // to get a value that is either negative, positive, or zero.
         return dateFormat(new Date(b.pub_date), "dd-mm-yyyy H:MM:ss") -  dateFormat(new Date(a.pub_date), "dddd, mmmm dS, yyyy, h:MM:ss TT");
       });
-    insertNew();
+    insertNews();
 }
 
 
@@ -43,14 +43,14 @@ function orderNews(data){
   </div>
 </div>
  */
-function insertNew(){
 
+ function insertNews(){
     const news = $('#news');
     for (i = 0; i < 10; i++) {
         if(i === 0){
             var firstCol =$('<div>', {
                 'class': 'col-12 border border-primary',
-                'id': orderNoticias[i].id
+                'id': i
             })
             var row = $('<div>', {
                 'class': 'row',
@@ -67,6 +67,9 @@ function insertNew(){
                 'class': 'd-flex col-6'
             })
             col2.append($('<h4>'+ orderNoticias[i].header +'</h4>'))
+            var button = $('<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable">Leer mas...</button>')
+
+            col2.append(button);
 
             row.append(col);
             row.append(col1);
@@ -75,31 +78,26 @@ function insertNew(){
             firstCol.append(row);
 
             news.append(firstCol);
-
         }else{
             var firstCol =$('<div>', {
-                'class': 'col-4 border border-dark rounded',
-                'id': orderNoticias[i].id
-            })
-            var row = $('<div>', {
-                'class': 'row'
+                'class': 'col-4',
+                'id': i
             })
 
-            var col = $('<div>', {
-                'class': 'col-12'
-            })
-            col.append($('<img src=' + orderNoticias[i].img_url + '></img>'))
-            var col1 = $('<div>', {
-                'class': 'd-flex col-12 justify-content-center align-content-center'
-            })
-            col1.append($('<h2>'+ orderNoticias[i].title +'</h2>'))
+            var card = $('<div class="card">')
+            var img = $('<img src="'+orderNoticias[i].img_url+'" class="card-img-top" alt="...">')
+            var cardbody = $('<div class="card-body">')
+            var title = $('<p class="card-title">'+ orderNoticias[i].title +'</p>');
+            var button = $('<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable">Leer mas...</button>')
 
-            row.append(col);
-            row.append(col1);
-
-            firstCol.append(row);
+            cardbody.append(title);
+            cardbody.append(button);
+            card.append(img);
+            card.append(cardbody);
+            
+            firstCol.append(card);
 
             news.append(firstCol);
         }
     }
-} 
+ }

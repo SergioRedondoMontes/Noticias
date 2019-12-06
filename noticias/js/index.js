@@ -1,16 +1,13 @@
-let $table = $("#table");
+let $container = $("#news");
 var orderNoticias = null;
 
-$($table).ready(function() {
+$($container).ready(function() {
   getNews();
 });
 
 function getNews() {
   $.get("http://127.0.0.1:8000/api/noticia/", data => {
     if (data != []) {
-      //   for (i = 0; i < data.length; i++) {
-      //       console.log(data[i]);
-      //   }
       orderNews(data);
     } else {
       //TODO: Delete table
@@ -22,9 +19,6 @@ function getNew(id) {
   var url = "http://127.0.0.1:8000/api/noticia/" + id + "/";
   $.get(url, data => {
     if (data != []) {
-      //   for (i = 0; i < data.length; i++) {
-      //       console.log(data[i]);
-      //   }
       pushModal(data);
     } else {
       alert("No se ha podido cargar la noticia, intentlo más tarde");

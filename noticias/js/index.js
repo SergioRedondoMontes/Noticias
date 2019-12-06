@@ -1,6 +1,4 @@
 let $table = $("#table");
-let $remove = $("#remove");
-var selectedRow = null;
 var orderNoticias = null;
 
 $($table).ready(function() {
@@ -129,6 +127,11 @@ function pushModal(data) {
   var header = $("#modalHeader");
   var content = $("#modalContent");
   var img = $("#modalImg");
+
+  //limpiamos los textos
+  title.empty();
+  header.empty();
+  content.empty();
 
   //Solo muestro la segunda imagen si es distita de la primera
   if (data.img_url != data.img2_url) {

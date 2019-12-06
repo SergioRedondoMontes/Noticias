@@ -26,11 +26,14 @@ function postNew(data) {
   });
 }
 
-function deleteNew() {
+function deleteNew(id) {
   $.ajax({
-    url: URL,
+    url: URL + id,
     type: "DELETE",
-    success: function(result) {}
+    success: function(result) {
+      console.log("eee ooo");
+      $("#" + id).remove();
+    }
   });
 }
 
@@ -123,3 +126,26 @@ $(document).ready(function() {
 });
 
 // End visual functions
+
+function onFormSubmit() {
+  console.log("entro");
+  var formData = readFormData();
+  console.log(formData);
+  postNew(formData);
+}
+
+function onDelete(id) {
+  if (confirm("Are you sure to delete this new ?")) {
+    deleteNew(id);
+  }
+}
+
+function readFormData() {
+  var formData = {};
+  formData["title"] = $("#inputTitle").val();
+  formData["header"] = $("#inputHeader").val();
+  formData["img_url"] = $("#inputImg").val();
+  formData["content"] = $("#inputContent").val();
+  formData["img2_url"] = $("#inputImg2").val();
+  return formData;
+}

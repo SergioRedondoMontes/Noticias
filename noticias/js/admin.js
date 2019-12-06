@@ -20,9 +20,7 @@ function getNews() {
 
 function postNew(data) {
   $.post(URL, data, function(result) {
-    console.log(result);
-    resetForm();
-    // insertSingleNew(data);
+    insertSingleNew(result[result.length - 1]);
   });
 }
 
@@ -31,7 +29,6 @@ function deleteNew(id) {
     url: URL + id,
     type: "DELETE",
     success: function(result) {
-      console.log("eee ooo");
       $("#" + id).remove();
     }
   });
@@ -108,6 +105,11 @@ function resetForm() {
   $("#img2_url").empty();
 }
 
+/***
+ * Boton desactivado por defecto al estar los campos vacíos
+ * Se activa cuando todos los campos estan rellenos
+ * Se desactiva si detecta un campo vacío
+ */
 $(document).ready(function() {
   $(':button[type="submit"]').prop("disabled", true);
   $(".field input, .field textarea").on("keyup", function() {
@@ -128,9 +130,7 @@ $(document).ready(function() {
 // End visual functions
 
 function onFormSubmit() {
-  console.log("entro");
   var formData = readFormData();
-  console.log(formData);
   postNew(formData);
 }
 

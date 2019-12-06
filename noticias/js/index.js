@@ -1,7 +1,7 @@
 let $table = $("#table");
 let $remove = $("#remove");
 var selectedRow = null;
-var mapNoticias = null;
+var orderNoticias = null;
 
 $($table).ready(function() {
   getNews();
@@ -20,6 +20,20 @@ function getNews() {
   });
 }
 
+function getNew(id) {
+  var url = "http://127.0.0.1:8000/api/noticia/" + id + "/";
+  $.get(url, data => {
+    if (data != []) {
+      //   for (i = 0; i < data.length; i++) {
+      //       console.log(data[i]);
+      //   }
+      pushModal(data);
+    } else {
+      alert("No se ha podido cargar la noticia, intentlo más tarde");
+    }
+  });
+}
+
 // ordena por fecha las noticias
 function orderNews(data) {
   //"05-11-2019 22:20:44"
@@ -33,15 +47,6 @@ function orderNews(data) {
   });
   insertNews();
 }
-
-/**Futuras modificaciones
- * <div class="card" style="width: 18rem;">
-  <img src="..." class="card-img-top" alt="...">
-  <div class="card-body">
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-  </div>
-</div>
- */
 
 function insertNews() {
   const news = $("#news");
@@ -67,7 +72,9 @@ function insertNews() {
       });
       col2.append($("<h4>" + orderNoticias[i].header + "</h4>"));
       var button = $(
-        '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable">Leer mas...</button>'
+        '<button type="button" class="btn btn-primary" data-toggle="modal" onclick="getNew(' +
+          orderNoticias[i].id +
+          ')" data-target="#exampleModalScrollable">Leer mas...</button>'
       );
 
       col2.append(button);
@@ -87,14 +94,16 @@ function insertNews() {
 
       var card = $('<div class="card">');
       var img = $(
-        '<img src="' +
+        '<img class="imgCard" src="' +
           orderNoticias[i].img_url +
           '" class="card-img-top" alt="...">'
       );
       var cardbody = $('<div class="card-body">');
       var title = $('<p class="card-title">' + orderNoticias[i].title + "</p>");
       var button = $(
-        '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable">Leer mas...</button>'
+        '<button type="button" class="btn btn-primary btnCard" data-toggle="modal" onclick="getNew(' +
+          orderNoticias[i].id +
+          ')" data-target="#exampleModalScrollable">Leer mas...</button>'
       );
 
       cardbody.append(title);
@@ -109,4 +118,21 @@ function insertNews() {
   }
 }
 
-function createModal() {}
+function pushModal(data) {
+  var title = $("#modalTitle");
+  var header = $("#modalHeader");
+  var content = $("#modalContent");
+  var img = $("#modalImg");
+
+  //Solo muestro la segunda imagen si es distita de la primera
+  if (data.img_url != data.img2_url) {
+    console.log("distinto");
+    $(".modal-body").append(
+      '<img id="modalImg" src="' + data.img2_url + '" alt="" />'
+    );
+  }
+  title.append(data.title);
+  header.append(data.header);
+  img.attr("src", data.img_url);
+  content.append(data.content);
+}

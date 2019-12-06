@@ -31,8 +31,8 @@
       crossorigin="anonymous"
     ></script>
 
-    <!-- <script src="js/dateformat.js"></script>
-    <script src="js/index.js"></script> -->
+    <script src="js/dateformat.js"></script>
+    <script src="js/admin.js"></script>
 
     <!-- Navigation -->
     <div class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
@@ -71,9 +71,94 @@
       </div>
     </div>
 
-    <!-- Container -->
+    <!-- Form container -->
     <div class="container-fluid">
-      <div class="row" id="news"></div>
+      <div class="row" id="news">
+        <div class="col-12" style="margin-top: 50px;">
+          <form
+            onsubmit="event.preventDefault();onFormSubmit();"
+            autocomplete="off"
+          >
+            <div class="form-row">
+              <div class="form-group col-6 field">
+                <label for="inputTitle">Title</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="inputTitle"
+                  maxlength="20"
+                  placeholder="Title"
+                />
+              </div>
+              <div class="form-group col-6 field">
+                <label for="inputHeader">Header</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="inputHeader"
+                  maxlength="80"
+                  placeholder="Header"
+                />
+              </div>
+              <div class="form-group col-12 field">
+                <label for="inputContent">Content</label>
+                <textarea
+                  type="text"
+                  class="form-control"
+                  id="inputContent"
+                  maxlength="5000"
+                  placeholder="Content"
+                ></textarea>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-6 field">
+                <label for="inputImg">Img url</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="inputImg"
+                  placeholder="http://image.jpg"
+                />
+              </div>
+              <div class="form-group col-6 field">
+                <label for="inputImg2">Img2 url</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="inputImg"
+                  placeholder="http://image2.jpg"
+                />
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="col-12">
+          <!-- disabled -->
+          <button
+            type="submit"
+            class="btn btn-primary "
+            style="margin-top: 50px; margin-bottom: 50px;"
+          >
+            Insert new
+          </button>
+        </div>
+
+        <!-- Table -->
+        <table class="table table-hover" id="table">
+          <thead>
+            <tr>
+              <th scope="col">Id</th>
+              <th scope="col">Title</th>
+              <th scope="col">Header</th>
+              <th scope="col">Date</th>
+              <th scope="col">Img</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
     </div>
   </body>
 </html>

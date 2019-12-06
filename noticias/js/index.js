@@ -42,8 +42,9 @@ function orderNews(data) {
 
 function insertNews() {
   const news = $("#news");
-  for (i = 0; i < 10; i++) {
-    if (i === 0) {
+  var size = orderNoticias.length - 1;
+  for (i = size; i >= 0; i--) {
+    if (i === size) {
       var firstCol = $("<div>", {
         class: "col-12 border border-primary",
         id: i
@@ -129,7 +130,6 @@ function pushModal(data) {
 
   //Solo muestro la segunda imagen si es distita de la primera
   if (data.img_url != data.img2_url) {
-    console.log("distinto");
     $(".modal-body").append(
       '<img id="modalImg" src="' + data.img2_url + '" alt="" />'
     );

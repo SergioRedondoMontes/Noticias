@@ -70,14 +70,20 @@ function insertNews() {
       var col2 = $("<div>", {
         class: "d-flex col-6"
       });
-      col2.append($("<h4>" + orderNoticias[i].header + "</h4>"));
-      var button = $(
-        '<button type="button" class="btn btn-primary" data-toggle="modal" onclick="getNew(' +
+      col2.append(
+        '<div class="row">' +
+          '<div class="col-12">' +
+          "<h4>" +
+          orderNoticias[i].header +
+          "</h4>" +
+          "</div>" +
+          '<div class="offset-9 col-2">' +
+          '<button type="button" class="btn btn-primary" data-toggle="modal" onclick="getNew(' +
           orderNoticias[i].id +
-          ')" data-target="#exampleModalScrollable">Leer mas...</button>'
+          ')" data-target="#exampleModalScrollable">Leer mas...</button>' +
+          "</div>" +
+          "</div>"
       );
-
-      col2.append(button);
 
       row.append(col);
       row.append(col1);

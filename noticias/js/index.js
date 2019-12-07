@@ -71,8 +71,8 @@ function insertNews() {
           orderNoticias[i].header +
           "</h4>" +
           "</div>" +
-          '<div class="offset-9 col-2">' +
-          '<button type="button" class="btn btn-primary" data-toggle="modal" onclick="getNew(' +
+          '<div class="offset-7 col-4">' +
+          '<button type="button" class="btn btn-primary" data-toggle="modal" style="width:100%" onclick="getNew(' +
           orderNoticias[i].id +
           ')" data-target="#exampleModalScrollable">Leer mas...</button>' +
           "</div>" +

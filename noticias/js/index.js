@@ -43,7 +43,8 @@ function orderNews(data) {
 function insertNews() {
   const news = $("#news");
   var size = orderNoticias.length - 1;
-  for (i = size; i >= 0; i--) {
+  var tmp = size - 9;
+  for (i = size; i >= tmp; i--) {
     if (i === size) {
       var firstCol = $("<div>", {
         class: "col-12 border border-primary",
